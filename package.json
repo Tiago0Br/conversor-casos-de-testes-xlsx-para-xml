@@ -8,9 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "read-excel-file": "5.5.1",
-    "xmlbuilder2": "3.0.2"
-  }
+  "license": "ISC"
 }
