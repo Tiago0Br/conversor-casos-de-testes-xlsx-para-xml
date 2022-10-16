@@ -1,0 +1,16 @@
+{
+  "name": "exconverter-web",
+  "version": "1.0.0",
+  "description": "Conversor de arquivos de casos de teste em XLS para XML compatível com o Testlink",
+  "module": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "read-excel-file": "5.5.1",
+    "xmlbuilder2": "3.0.2"
+  }
+}
