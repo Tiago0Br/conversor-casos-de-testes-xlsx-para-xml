@@ -10,8 +10,8 @@ const button = document.getElementById('download')
 const linkDownload = document.getElementById('link-download')
 
 btnConvert.addEventListener('click', () => {
-    if (!inputFile.files[0]) {
-        alert('Selecione um arquivo do Excel!')
+    if (!inputFile.files[0] || !inputFile.files[0].name.includes('xls')) {
+        alert('Selecione um arquivo XLSX!')
         return;
     }
 
@@ -24,6 +24,8 @@ btnConvert.addEventListener('click', () => {
     const startRow = inputStartRow.value - 1
     const endRow = inputEndRow.value - 1
     const columnName = inputName.value - 1
+    const columnSummary = inputSummary.value - 1
+    const columnPreconditions = inputPreconditions.value - 1
 
     const testcases = xmlbuilder2.create().ele('testcases')
     readXlsxFile(inputFile.files[0]).then((rows) => {
@@ -31,6 +33,9 @@ btnConvert.addEventListener('click', () => {
             const testcase = testcases.ele('testcase')
             testcase.att('internalid', "")
             testcase.att('name', rows[currentRow][columnName])
+
+            testcase.ele('summary').txt(rows[currentRow][columnSummary])
+            testcase.ele('preconditions').txt(rows[currentRow][columnPreconditions])
         }
 
         const xml = testcases.end({ prettyPrint: true })
