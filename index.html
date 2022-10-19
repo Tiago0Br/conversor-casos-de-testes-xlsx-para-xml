@@ -5,48 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Converter casos de testes</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/xmlbuilder2/lib/xmlbuilder2.min.js" defer></script>
     <script src="scripts.js" defer></script>
 </head>
 <body>
-    <div>
-        <label for="excel-file">Arquivo do Excel</label>
-        <input type="file" name="excel-file" id="excel-file">
-    </div>
-    <div>
-        <label for="destination-file">Nome do arquivo de destino</label>
-        <input type="text" name="destination-file" id="destination-file" placeholder="Casos de testes">
-    </div>
-    <div>
-        <label for="start-row">Linha inicial</label>
-        <input type="number" name="start-row" id="start-row">
-    </div>
-    <div>
-        <label for="end-row">Última linha</label>
-        <input type="number" name="end-row" id="end-row">
-    </div>
-    <div>
-        <label for="name">Título</label>
-        <input type="number" name="name" id="name">
-    </div>
-    <div>
-        <label for="summary">Descrição</label>
-        <input type="number" name="summary" id="summary">
-    </div>
-    <div>
-        <label for="preconditions">Pré-condições</label>
-        <input type="number" name="preconditions" id="preconditions">
-    </div>
-    <button id="convert" type="submit">Converter</button>
-    <div>
-        <a id="link-download">
-            <button id="download" class="hidden">Download</button>
-        </a>
+    <div class="container">
+        <h2>Conversor de casos de testes para XML</h2>
+        <div class="form-inputs">
+            <div class="form-control">
+                <label for="excel-file">Arquivo XLSX</label>
+                <input type="file" name="excel-file" id="excel-file">
+            </div>
+            <div class="form-control">
+                <label for="destination-file">Nome do arquivo de destino</label>
+                <input type="text" name="destination-file" id="destination-file" placeholder="Casos de testes">
+            </div>
+            <div class="form-control">
+                <label for="start-row">Linha inicial</label>
+                <input type="number" name="start-row" id="start-row">
+            </div>
+            <div class="form-control">
+                <label for="end-row">Última linha</label>
+                <input type="number" name="end-row" id="end-row">
+            </div>
+            <div class="form-control">
+                <label for="name">Título</label>
+                <input type="number" name="name" id="name" autocomplete="off">
+            </div>
+            <div class="form-control">
+                <label for="summary">Descrição</label>
+                <input type="number" name="summary" id="summary" autocomplete="off">
+            </div>
+            <div class="form-control">
+                <label for="preconditions">Pré-condições</label>
+                <input type="number" name="preconditions" id="preconditions">
+            </div>
+        </div>
+        <div class="action-control">
+            <button id="convert" type="submit">Converter</button>
+            <a id="link-download">
+                <button id="download" disabled class="disabled">Download</button>
+            </a>
+        </div>
     </div>
     <footer>
-        <p>Feito com ❤️ por Tiago Lopes</p>
+        <p>Feito com ❤️ por <a href="https://github.com/Tiago0Br" target="_blank">Tiago Lopes</a></p>
     </footer>
 </body>
 </html>

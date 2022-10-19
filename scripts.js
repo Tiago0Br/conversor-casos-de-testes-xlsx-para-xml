@@ -38,8 +38,9 @@ btnConvert.addEventListener('click', () => {
             testcase.ele('preconditions').txt(rows[currentRow][columnPreconditions])
         }
 
+        const fileName = outputFilename.includes('.xml') ? outputFilename : `${outputFilename}.xml`
         const xml = testcases.end({ prettyPrint: true })
-        const file = new File([xml], outputFilename, {
+        const file = new File([xml], fileName, {
             type: 'text/plain'
         })
         updateDownloadButton(file)
@@ -60,5 +61,6 @@ function hasFieldEmpty() {
 function updateDownloadButton(file) {
     linkDownload.href = window.URL.createObjectURL(file)
     linkDownload.download = file.name || 'saida.xml'
-    button.classList.remove('hidden')
+    button.classList.remove('disabled')
+    button.removeAttribute('disabled')
 }
