@@ -1,22 +1,37 @@
 const btnConvert = document.getElementById('convert')
 const inputFile = document.getElementById('excel-file')
+const pFileName = document.querySelector('.file-name')
 const inputDestinationFile = document.getElementById('destination-file')
 const inputStartRow = document.getElementById('start-row')
 const inputEndRow = document.getElementById('end-row')
 const inputName = document.getElementById('name')
 const inputSummary = document.getElementById('summary')
 const inputPreconditions = document.getElementById('preconditions')
-const button = document.getElementById('download')
+const buttonDownload = document.getElementById('download')
 const linkDownload = document.getElementById('link-download')
 
+inputFile.addEventListener('change', () => {
+    if (!inputFile.files[0].name.endsWith('.xlsx')) {
+        swalAlert('error', 'Arquivo inválido', 'Adicione um arquivo de extensão XLSX!')
+        inputFile.value = ''
+        return;
+    }
+
+    const file = inputFile.files[0]
+    const { name: fileName, size } = file
+    const fileSize = (size / 1000).toFixed(2)
+    const fileNameAndSize = `${fileName} - ${fileSize}KB`
+    pFileName.textContent = fileNameAndSize
+})
+
 btnConvert.addEventListener('click', () => {
-    if (!inputFile.files[0] || !inputFile.files[0].name.includes('xls')) {
-        alert('Selecione um arquivo XLSX!')
+    if (!inputFile.files[0] || !inputFile.files[0].name.endsWith('.xlsx')) {
+        swalAlert('error', 'Arquivo não adicionado', 'Adicione um arquivo de extensão XLSX!')
         return;
     }
 
     if (hasFieldEmpty()) {
-        alert('Preencha todos os campos!')
+        swalAlert('error', 'Campos em branco', 'Por favor, preencha todos os campos!')
         return;
     }
 
@@ -47,20 +62,36 @@ btnConvert.addEventListener('click', () => {
     })
 })
 
+buttonDownload.addEventListener('click', () => {
+    linkDownload.click()
+})
+
+function swalAlert(type, title, text) {
+    Swal.fire({
+        icon: type,
+        title: title,
+        text: text,
+        showConfirmButton: false,
+        timer: 2000
+    })
+}
+
 function hasFieldEmpty() {
     return (
-        inputDestinationFile.value == "" ||
-        inputStartRow.value == "" ||
-        inputEndRow.value == "" ||
-        inputName.value == "" ||
-        inputSummary.value == "" ||
-        inputPreconditions.value == ""
+        inputDestinationFile.value == ""
+        || inputStartRow.value == ""
+        || inputEndRow.value == ""
+        || inputName.value == ""
+        || inputSummary.value == ""
+        || inputPreconditions.value == ""
     )
 }
 
 function updateDownloadButton(file) {
     linkDownload.href = window.URL.createObjectURL(file)
     linkDownload.download = file.name || 'saida.xml'
-    button.classList.remove('disabled')
-    button.removeAttribute('disabled')
+    buttonDownload.classList.remove('disabled')
+    buttonDownload.removeAttribute('disabled')
+
+    swalAlert('success', 'Prontinho!', 'Arquivo XML gerado com sucesso!')
 }
