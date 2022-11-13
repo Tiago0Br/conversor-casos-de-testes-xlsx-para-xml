@@ -30,8 +30,8 @@ btnConvert.addEventListener('click', () => {
         return;
     }
 
-    if (hasFieldEmpty()) {
-        swalAlert('error', 'Campos em branco', 'Por favor, preencha todos os campos!')
+    if (hasRequiredFieldEmpty()) {
+        swalAlert('error', 'Campos em branco', 'Por favor, preencha os campos obrigatórios!')
         return;
     }
 
@@ -40,7 +40,7 @@ btnConvert.addEventListener('click', () => {
     const endRow = inputEndRow.value - 1
     const columnName = inputName.value - 1
     const columnSummary = inputSummary.value - 1
-    const columnPreconditions = inputPreconditions.value - 1
+    const columnPreconditions = inputPreconditions.value ? inputPreconditions.value - 1 : null
 
     const testcases = xmlbuilder2.create().ele('testcases')
     readXlsxFile(inputFile.files[0]).then((rows) => {
@@ -50,7 +50,9 @@ btnConvert.addEventListener('click', () => {
             testcase.att('name', rows[currentRow][columnName])
 
             testcase.ele('summary').txt(rows[currentRow][columnSummary])
-            testcase.ele('preconditions').txt(rows[currentRow][columnPreconditions])
+            if (columnPreconditions) {
+                testcase.ele('preconditions').txt(rows[currentRow][columnPreconditions])
+            }
         }
 
         const fileName = outputFilename.includes('.xml') ? outputFilename : `${outputFilename}.xml`
@@ -76,14 +78,13 @@ function swalAlert(type, title, text) {
     })
 }
 
-function hasFieldEmpty() {
+function hasRequiredFieldEmpty() {
     return (
         inputDestinationFile.value == ""
         || inputStartRow.value == ""
         || inputEndRow.value == ""
         || inputName.value == ""
         || inputSummary.value == ""
-        || inputPreconditions.value == ""
     )
 }
 

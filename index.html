@@ -11,6 +11,9 @@
     <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/xmlbuilder2/lib/xmlbuilder2.min.js" defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@100;400&display=swap" rel="stylesheet">
     <script src="scripts.js" defer></script>
 </head>
 <body>
@@ -22,25 +25,26 @@
                 <p class="file-name">Nenhum selecionado</p>
                 <input type="file" name="excel-file" id="excel-file">
             </div>
-            <div class="form-control">
+            <div class="form-control required">
                 <label for="destination-file">Nome do arquivo de destino</label>
-                <input type="text" name="destination-file" id="destination-file" placeholder="Casos de testes" maxlength="120">
+                <input type="text" name="destination-file" id="destination-file" placeholder="Casos de testes" 
+                maxlength="120" required>
             </div>
-            <div class="form-control">
+            <div class="form-control required">
                 <label for="start-row">Linha inicial</label>
-                <input type="number" name="start-row" id="start-row" min="1">
+                <input type="number" name="start-row" id="start-row" min="1" required>
             </div>
-            <div class="form-control">
+            <div class="form-control required">
                 <label for="end-row">Última linha</label>
-                <input type="number" name="end-row" id="end-row" min="1">
+                <input type="number" name="end-row" id="end-row" min="1" required>
             </div>
-            <div class="form-control">
+            <div class="form-control required">
                 <label for="name">Título</label>
-                <input type="number" name="name" id="name" autocomplete="off" min="1">
+                <input type="number" name="name" id="name" autocomplete="off" min="1" required>
             </div>
-            <div class="form-control">
+            <div class="form-control required">
                 <label for="summary">Descrição</label>
-                <input type="number" name="summary" id="summary" autocomplete="off" min="1">
+                <input type="number" name="summary" id="summary" autocomplete="off" min="1" required>
             </div>
             <div class="form-control">
                 <label for="preconditions">Pré-condições</label>
@@ -48,8 +52,14 @@
             </div>
         </div>
         <div class="action-control">
-            <button id="convert" class="button">Converter</button>
-            <button id="download" disabled class="disabled">Download</button>
+            <button id="convert" class="button">
+                <img src="images/convert.svg" alt="Converter arquivo">
+                Converter
+            </button>
+            <button id="download" disabled class="disabled">
+                <img src="images/download.svg" alt="Download">
+                Download
+            </button>
             <a id="link-download"></a>
         </div>
     </div>

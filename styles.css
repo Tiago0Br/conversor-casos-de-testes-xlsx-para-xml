@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -43,6 +44,7 @@ body {
 
 .form-control label {
     font-weight: bold;
+    font-size: 13px;
     margin-bottom: 0.3rem;
     color: #ccc;
 }
@@ -91,13 +93,29 @@ label[for="excel-file"]:hover {
 }
 
 .action-control button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     text-transform: uppercase;
     padding: 1rem 1.5rem;
-    background-color: #f44236;
     border: none;
     border-radius: 10px;
     color: #fff;
     flex-grow: 1;
+}
+
+.action-control button img {
+    width: 15px;
+    height: 15px;
+}
+
+.action-control button#convert {
+    background-color: #f44236;
+}
+
+.action-control button#download {
+    background-color: green;
 }
 
 .action-control button:not(.disabled) {
@@ -111,6 +129,11 @@ label[for="excel-file"]:hover {
 
 .action-control button.disabled {
     opacity: 0.5;
+}
+
+.required label::after {
+    content: ' *';
+    color: red;
 }
 
 footer a {
