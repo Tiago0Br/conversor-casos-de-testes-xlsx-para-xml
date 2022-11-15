@@ -9,6 +9,8 @@ const inputSummary = document.getElementById('summary')
 const inputPreconditions = document.getElementById('preconditions')
 const buttonDownload = document.getElementById('download')
 const linkDownload = document.getElementById('link-download')
+const radioButtonSim = document.getElementById('radio_sim')
+const radioButtonNao = document.getElementById('radio_nao')
 
 inputFile.addEventListener('change', () => {
     if (!inputFile.files[0].name.endsWith('.xlsx')) {
@@ -44,15 +46,23 @@ btnConvert.addEventListener('click', () => {
 
     const testcases = xmlbuilder2.create().ele('testcases')
     readXlsxFile(inputFile.files[0]).then((rows) => {
+        let position = 1
         for (let currentRow = startRow; currentRow <= endRow; currentRow++) {
             const testcase = testcases.ele('testcase')
             testcase.att('internalid', "")
-            testcase.att('name', rows[currentRow][columnName])
+
+            if (document.querySelector('input[checked]').value === 's') {
+                const testNumber = position  >= 10 ? `${position}` : `0${position}`
+                testcase.att('name', `${testNumber} - ${rows[currentRow][columnName]}`)
+            } else {
+                testcase.att('name', rows[currentRow][columnName])
+            }
 
             testcase.ele('summary').txt(rows[currentRow][columnSummary])
             if (columnPreconditions) {
                 testcase.ele('preconditions').txt(rows[currentRow][columnPreconditions])
             }
+            position++
         }
 
         const fileName = outputFilename.includes('.xml') ? outputFilename : `${outputFilename}.xml`
@@ -62,6 +72,16 @@ btnConvert.addEventListener('click', () => {
         })
         updateDownloadButton(file)
     })
+})
+
+radioButtonSim.addEventListener('click', () => {
+    radioButtonSim.setAttribute('checked', true)
+    radioButtonNao.removeAttribute('checked')
+})
+
+radioButtonNao.addEventListener('click', () => {
+    radioButtonNao.setAttribute('checked', true)
+    radioButtonSim.removeAttribute('checked')
 })
 
 buttonDownload.addEventListener('click', () => {
