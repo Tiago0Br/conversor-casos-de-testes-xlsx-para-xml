@@ -24,6 +24,9 @@ inputFile.addEventListener('change', () => {
     const fileSize = (size / 1000).toFixed(2)
     const fileNameAndSize = `${fileName} - ${fileSize}KB`
     pFileName.textContent = fileNameAndSize
+
+    const defaultFileName = fileName.replace('.xlsx', '.xml')
+    inputDestinationFile.setAttribute('placeholder', defaultFileName)
 })
 
 btnConvert.addEventListener('click', () => {
@@ -37,7 +40,8 @@ btnConvert.addEventListener('click', () => {
         return;
     }
 
-    const outputFilename = inputDestinationFile.value
+    const defaultFileName = inputFile.files[0].name.replace('.xlsx', '.xml')
+    const outputFilename = inputDestinationFile.value || defaultFileName
     const startRow = inputStartRow.value - 1
     const endRow = inputEndRow.value - 1
     const columnName = inputName.value - 1
@@ -100,8 +104,7 @@ function swalAlert(type, title, text) {
 
 function hasRequiredFieldEmpty() {
     return (
-        inputDestinationFile.value == ""
-        || inputStartRow.value == ""
+        inputStartRow.value == ""
         || inputEndRow.value == ""
         || inputName.value == ""
         || inputSummary.value == ""
