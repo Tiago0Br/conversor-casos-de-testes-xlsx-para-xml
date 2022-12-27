@@ -27,6 +27,8 @@ inputFile.addEventListener('change', () => {
 
     const defaultFileName = fileName.replace('.xlsx', '.xml')
     inputDestinationFile.setAttribute('placeholder', defaultFileName)
+
+    inputEndRow.focus()
 })
 
 btnConvert.addEventListener('click', () => {
@@ -36,16 +38,16 @@ btnConvert.addEventListener('click', () => {
     }
 
     if (hasRequiredFieldEmpty()) {
-        swalAlert('error', 'Campos em branco', 'Por favor, preencha os campos obrigatórios!')
+        swalAlert('error', 'Campos em branco', 'Por favor, preencha o campo "Última linha"!')
         return;
     }
 
     const defaultFileName = inputFile.files[0].name.replace('.xlsx', '.xml')
     const outputFilename = inputDestinationFile.value || defaultFileName
-    const startRow = inputStartRow.value - 1
+    const startRow = inputStartRow.value ? inputStartRow.value - 1 : 1
     const endRow = inputEndRow.value - 1
-    const columnName = inputName.value - 1
-    const columnSummary = inputSummary.value - 1
+    const columnName = inputName.value ? inputName.value - 1 : 0
+    const columnSummary = inputSummary.value ? inputSummary.value - 1 : 2
     const columnPreconditions = inputPreconditions.value ? inputPreconditions.value - 1 : null
 
     const testcases = xmlbuilder2.create().ele('testcases')
@@ -75,6 +77,9 @@ btnConvert.addEventListener('click', () => {
             type: 'text/plain'
         })
         updateDownloadButton(file)
+
+        const quant = position-1
+        swalAlert('success', 'Sucesso!', `Foram gerados ${quant} casos de testes.`)
     })
 })
 
@@ -90,6 +95,8 @@ radioButtonNao.addEventListener('click', () => {
 
 buttonDownload.addEventListener('click', () => {
     linkDownload.click()
+
+    window.location.reload()
 })
 
 function swalAlert(type, title, text) {
@@ -104,10 +111,7 @@ function swalAlert(type, title, text) {
 
 function hasRequiredFieldEmpty() {
     return (
-        inputStartRow.value == ""
-        || inputEndRow.value == ""
-        || inputName.value == ""
-        || inputSummary.value == ""
+        inputEndRow.value == ""
     )
 }
 
@@ -116,6 +120,4 @@ function updateDownloadButton(file) {
     linkDownload.download = file.name || 'saida.xml'
     buttonDownload.classList.remove('disabled')
     buttonDownload.removeAttribute('disabled')
-
-    swalAlert('success', 'Prontinho!', 'Arquivo XML gerado com sucesso!')
 }
