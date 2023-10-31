@@ -47,7 +47,7 @@ btnConvert.addEventListener('click', () => {
     const startRow = inputStartRow.value ? inputStartRow.value - 1 : 1
     const endRow = inputEndRow.value - 1
     const columnName = inputName.value ? inputName.value - 1 : 0
-    const columnSummary = inputSummary.value ? inputSummary.value - 1 : 2
+    const columnSummary = inputSummary.value ? inputSummary.value - 1 : 1
     const columnPreconditions = inputPreconditions.value ? inputPreconditions.value - 1 : null
 
     const testcases = xmlbuilder2.create().ele('testcases')

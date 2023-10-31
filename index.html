@@ -25,6 +25,14 @@
                 <p class="file-name">Nenhum selecionado</p>
                 <input type="file" name="excel-file" id="excel-file">
             </div>
+            <div class="information">
+                <a href="example/Planejamento.xlsx" download>
+                    <span>
+                        Baixar modelo 
+                        <img src="images/download2.png" alt="Download">
+                    </span>
+                </a>
+            </div>
             <div class="form-control">
                 <label for="destination-file">Nome do arquivo de destino</label>
                 <input type="text" name="destination-file" id="destination-file" placeholder="Casos de testes" 
@@ -44,7 +52,7 @@
             </div>
             <div class="form-control">
                 <label for="summary">Descrição</label>
-                <input type="number" name="summary" id="summary" autocomplete="off" min="1" placeholder="3">
+                <input type="number" name="summary" id="summary" autocomplete="off" min="1" placeholder="2">
             </div>
             <div class="form-control">
                 <label for="preconditions">Pré-condições</label>
@@ -53,9 +61,9 @@
             <div class="form-control">
                 <label>Gerar com numeração?</label>
                 <div class="radiobutton">
-                    <input type="radio" id="radio_sim" name="numeracao" value="s">
+                    <input type="radio" id="radio_sim" name="numeracao" value="s" checked>
                     <label for="radio_sim">Sim</label>
-                    <input type="radio" id="radio_nao" name="numeracao" value="n" checked="true">
+                    <input type="radio" id="radio_nao" name="numeracao" value="n">
                     <label for="radio_nao">Não</label>
                 </div>
             </div>

@@ -53,6 +53,29 @@ body {
     padding: 0.5rem 0.5rem;
 }
 
+.information {
+    margin-bottom: 20px;
+}
+
+.information a {
+    text-decoration: none;
+    color: #ccc;
+    display: inline-block;
+}
+
+.information a span {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 5px;
+}
+
+.information img {
+    width: 30px;
+    height: 30px;
+}
+
 .action-control {
     display: flex;
     justify-content: space-between;
